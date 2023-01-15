@@ -61,6 +61,11 @@ async function getSongId(songName) {
       </Head>
       <div className='root'>
         <div className='header'>
+          <h1>
+            Created with ❤️ by Manas
+          </h1>
+        </div>
+        <div className='header'>
           <div className='header-title'>
             <h1>Buk Vibr!</h1>
           </div>
