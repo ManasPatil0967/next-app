@@ -10,7 +10,7 @@ const Home = () =>{
   const [songId, setSongId] = useState('');
   const [songData, setSongData] = useState(null);
   function onchangebook(event){
-    console.log(event.target.value);
+    //console.log(event.target.value);
     setbook(event.target.value);
   }
   const [apiOutput, setApiOutput] = useState('')
@@ -30,20 +30,14 @@ const callGenerateEndpoint = async () => {
 
   const data = await response.json();
   const { output } = data;
-  console.log("OpenAI replied...", output.text)
+  //console.log("OpenAI replied...", output.text)
 
   setApiOutput(`${output.text}`);
   setIsGenerating(false);
   getSongId(output.text);
 }
 
-// Replace YOUR_ACCESS_TOKEN with your actual access token
-
-
-// Replace YOUR_SONG_NAME with the name of the song you want to search for
-
 async function getSongId(songName) {
-  //const access_token = process.env.YOUR_ACCESS_TOKEN;
     try {
         // Make the API request to search for the song
         const response = await fetch(`https://v1.nocodeapi.com/manaspatil0967/spotify/UpMrfvcRBxTwIOHU/search?q=${songName}&type=track`);
