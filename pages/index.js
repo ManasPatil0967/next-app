@@ -44,7 +44,7 @@ async function getSongId(songName) {
         const json = await response.json();
         // Extract the song's ID from the API response
         const songId = json.tracks.items[0].id;
-        console.log(`The ID of the song is: ${songId}`);
+        //console.log(`The ID of the song is: ${songId}`);
         setSongId(songId);
         return songId;
     } catch (error) {
