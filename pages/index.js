@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ['latin'] })
 const spotifyApi = new SpotifyWebApi();
 const Home = () =>{
   const [book, setbook] = useState('');
-  //const [song, setSong] = useState('');
+  const [songId, setSongId] = useState('');
   const [songData, setSongData] = useState(null);
   function onchangebook(event){
     console.log(event.target.value);
@@ -34,14 +34,28 @@ const callGenerateEndpoint = async () => {
 
   setApiOutput(`${output.text}`);
   setIsGenerating(false);
-  handleSubmit();
+  getSongId(output.text);
 }
-const handleSubmit = async (e) => {
-  //e.preventDefault();
-  // You will need to set your Spotify API credentials here
-  spotifyApi.setAccessToken(process.env.YOUR_ACCESS_TOKEN);
-  const data = await spotifyApi.searchTracks(apiOutput);
-  setSongData(data.tracks.items[0]);
+
+// Replace YOUR_ACCESS_TOKEN with your actual access token
+
+
+// Replace YOUR_SONG_NAME with the name of the song you want to search for
+
+async function getSongId(songName) {
+  //const access_token = process.env.YOUR_ACCESS_TOKEN;
+    try {
+        // Make the API request to search for the song
+        const response = await fetch(`https://v1.nocodeapi.com/manaspatil0967/spotify/UpMrfvcRBxTwIOHU/search?q=${songName}&type=track`);
+        const json = await response.json();
+        // Extract the song's ID from the API response
+        const songId = json.tracks.items[0].id;
+        console.log(`The ID of the song is: ${songId}`);
+        setSongId(songId);
+        return songId;
+    } catch (error) {
+        console.log(error);
+    }
 }
   return (
     <>
@@ -80,9 +94,9 @@ const handleSubmit = async (e) => {
         </div>
         <div>
       
-      {songData && (
+      {songId && (
         <iframe
-          src={`https://open.spotify.com/embed/track/${songData.id}`}
+          src={`https://open.spotify.com/embed/track/${songId}`}
           width="300"
           height="380"
           frameBorder="0"
